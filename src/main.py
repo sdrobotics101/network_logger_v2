@@ -149,11 +149,15 @@ keys = [
 ]
 
 client = pydsm.Client(47, 193, True)
-def main():
-    log_dirname = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    log_dir = os.path.join(os.getcwd(), log_dirname)
+def main(args):
+    if len(args) > 1:
+        log_dirname = args[1]
+    else:
+        log_dirname = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    log_dir = os.path.join(os.path.expanduser("~/robosub_logs"), log_dirname)
     os.makedirs(log_dir)
     log_filename = os.path.join(log_dir, "robosub.log")
+    print("logging to file: ", log_filename)
 
     logger = logging.getLogger('logger')
     logger.setLevel(logging.INFO)
@@ -162,13 +166,13 @@ def main():
 
     list(map(register_buffer, keys))
     time.sleep(0.5)
-    print("Registered remote buffers")
 
     title = list(map(create_title, keys))
     title.insert(0, "# date time")
     title = " ".join(title)
     logger.info(title)
 
+    print("starting")
     while True:
         try:
             data = list(map(create_string, keys))
@@ -182,4 +186,4 @@ def main():
             break
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv)
