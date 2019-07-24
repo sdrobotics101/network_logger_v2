@@ -58,14 +58,11 @@ def create_string(key):
     values = map(lambda x: "obj."+x[1], contents(key))
     values = map(eval, values)
     values = map(float, values)
-    values = map(round4, values)
+    values = map(lambda x: round(x,4), values)
     values = map(str, values)
     values = list(values)
     values.append(str(int(active)))
     return " ".join(values)
-
-def round4(x):
-    return round(x, 4)
 
 keys = [
     ("control", MAS_IP, MAS_SID, ControlInput,
@@ -149,7 +146,7 @@ keys = [
     ),
 ]
 
-client = pydsm.Client(47, 193, True)
+client = pydsm.Client(254, 193, True)
 def main(args):
     if len(args) > 1:
         log_dirname = args[1]
