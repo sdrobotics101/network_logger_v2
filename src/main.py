@@ -50,8 +50,8 @@ def get_buffer(key):
 
 def create_title(key):
     var_names = list(map(lambda x: x[0], contents(key)))
-    var_names.append("active")
-    return " ".join(var_names)
+    var_names.append(name(key)+"_active")
+    return ",".join(var_names)
 
 def create_string(key):
     active, obj = get_buffer(key)
@@ -62,7 +62,7 @@ def create_string(key):
     values = map(str, values)
     values = list(values)
     values.append(str(int(active)))
-    return " ".join(values)
+    return ",".join(values)
 
 keys = [
     ("control", MAS_IP, MAS_SID, ControlInput,
@@ -166,17 +166,17 @@ def main(args):
     time.sleep(0.5)
 
     title = list(map(create_title, keys))
-    title.insert(0, "# date time")
-    title = " ".join(title)
+    title.insert(0, "date,time")
+    title = ",".join(title)
     logger.info(title)
 
     print("starting")
     while True:
         try:
             data = list(map(create_string, keys))
-            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
+            timestamp = datetime.now().strftime("%Y-%m-%d,%H:%M:%S.%f")
             data.insert(0, timestamp)
-            data = " ".join(data)
+            data = ",".join(data)
             logger.info(data)
             time.sleep(0.01)
         except KeyboardInterrupt:
