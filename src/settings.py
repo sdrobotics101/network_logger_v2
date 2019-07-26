@@ -3,7 +3,7 @@ sys.path.append("./dependencies/python-shared-buffers/shared_buffers/")
 
 from master import ControlInput, SensorReset
 from sensor import Angular, Linear, Data
-from navigation import Kill, Outputs, Health, PhysicalOutput
+from navigation import Kill, Outputs, Health, PhysicalOutput, RawOutputs
 from vision import DetectionArray
 
 # MAS_IP = "10.0.0.42"
@@ -59,6 +59,18 @@ keys = [
             ("motor5", "motors[5]"),
             ("motor6", "motors[6]"),
             ("motor7", "motors[7]"),
+        )
+    ),
+    ("raw_outputs", NAV_IP, NAV_SID, RawOutputs,
+        (
+            ("raw_motor0", "motors[0]"),
+            ("raw_motor1", "motors[1]"),
+            ("raw_motor2", "motors[2]"),
+            ("raw_motor3", "motors[3]"),
+            ("raw_motor4", "motors[4]"),
+            ("raw_motor5", "motors[5]"),
+            ("raw_motor6", "motors[6]"),
+            ("raw_motor7", "motors[7]"),
         )
     ),
     ("nav_linear", NAV_IP, NAV_SID, PhysicalOutput,
