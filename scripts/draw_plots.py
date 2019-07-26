@@ -6,7 +6,7 @@ import csv
 from datetime import datetime
 
 from bokeh.plotting import figure, output_file, show
-from bokeh.models import BoxAnnotation, LinearAxis, Range1d
+from bokeh.models import BoxAnnotation, LinearAxis, Range1d, HoverTool
 from bokeh.palettes import Category10
 import itertools
 
@@ -102,6 +102,10 @@ def main(args):
 
     p.legend.location = "top_right"
     p.legend.click_policy = "hide"
+
+    p.add_tools(HoverTool())
+    # Box Zoom tool is the third so use index 2
+    p.toolbar.active_drag = p.tools[2]
 
     show(p)
 
