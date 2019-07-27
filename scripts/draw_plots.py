@@ -27,6 +27,12 @@ def main(args):
     m3 = []
     m4 = []
     m5 = []
+    r0 = []
+    r1 = []
+    r2 = []
+    r3 = []
+    r4 = []
+    r5 = []
     killed = []
     if len(args) < 2:
         print("need input file")
@@ -50,6 +56,12 @@ def main(args):
             m3.append(float(row['motor3']))
             m4.append(float(row['motor4']))
             m5.append(float(row['motor5']))
+            r0.append(float(row['raw_motor0']))
+            r1.append(float(row['raw_motor1']))
+            r2.append(float(row['raw_motor2']))
+            r3.append(float(row['raw_motor3']))
+            r4.append(float(row['raw_motor4']))
+            r5.append(float(row['raw_motor5']))
             lvx.append(float(row['m_lvx']))
             killed.append(bool(float(row['killed'])))
 
@@ -74,10 +86,12 @@ def main(args):
                sizing_mode="stretch_both")
     p.extra_y_ranges = {"lvx": Range1d(start=-150,end=150),
                         "depth": Range1d(start=4, end=-1),
-                        "motors": Range1d(start=-400, end=400)}
+                        "motors": Range1d(start=-100, end=100),
+                        "raw": Range1d(start=4000, end=8000)}
     p.add_layout(LinearAxis(y_range_name="lvx", axis_label="velocity"), 'left')
     p.add_layout(LinearAxis(y_range_name="depth", axis_label="depth (meters)"), 'left')
     p.add_layout(LinearAxis(y_range_name="motors", axis_label="motors"), 'left')
+    p.add_layout(LinearAxis(y_range_name="raw", axis_label="raw"), 'left')
 
     colors = itertools.cycle(Category10[10])
     p.line(timestamps, x_actual, color=next(colors), legend="x_actual")
@@ -94,7 +108,13 @@ def main(args):
     p.line(timestamps, m2, color=next(colors), legend="m2", y_range_name="motors")
     p.line(timestamps, m3, color=next(colors), legend="m3", y_range_name="motors")
     p.line(timestamps, m4, color=next(colors), legend="m4", y_range_name="motors")
-    p.line(timestamps, m4, color=next(colors), legend="m4", y_range_name="motors")
+    p.line(timestamps, m5, color=next(colors), legend="m5", y_range_name="motors")
+    p.line(timestamps, r0, color=next(colors), legend="r0", y_range_name="raw")
+    p.line(timestamps, r1, color=next(colors), legend="r1", y_range_name="raw")
+    p.line(timestamps, r2, color=next(colors), legend="r2", y_range_name="raw")
+    p.line(timestamps, r3, color=next(colors), legend="r3", y_range_name="raw")
+    p.line(timestamps, r4, color=next(colors), legend="r4", y_range_name="raw")
+    p.line(timestamps, r5, color=next(colors), legend="r5", y_range_name="raw")
 
     for i in range(len(rising_edges)):
         box = BoxAnnotation(left=rising_edges[i], right=falling_edges[i], fill_color='red')
