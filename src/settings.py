@@ -6,15 +6,15 @@ from sensor import Angular, Linear, Data
 from navigation import Kill, Outputs, Health, PhysicalOutput, RawOutputs
 from vision import DetectionArray
 
-# MAS_IP = "10.0.0.42"
-# SEN_IP = "10.0.0.43"
-# NAV_IP = "10.0.0.44"
-# VIS_IP = "10.0.0.45"
+MAS_IP = "10.0.0.42"
+SEN_IP = "10.0.0.43"
+NAV_IP = "10.0.0.44"
+VIS_IP = "10.0.0.45"
 
-MAS_IP = "127.0.0.1"
-SEN_IP = "127.0.0.1"
-NAV_IP = "127.0.0.1"
-VIS_IP = "127.0.0.1"
+# MAS_IP = "127.0.0.1"
+# SEN_IP = "127.0.0.1"
+# NAV_IP = "127.0.0.1"
+# VIS_IP = "127.0.0.1"
 
 MAS_SID = 42
 SEN_SID = 43
